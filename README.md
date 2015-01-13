@@ -9,3 +9,6 @@ The project is organized is follows:
 * A
 * B
 * C
+
+## Running the JFlex Maven Plugin
+
