@@ -31,7 +31,7 @@
         </plugins>
     </build>
     <name>TinyPy Compiler</name>
-    <url>http://maven.apache.org</url>
+    <url>https://github.com/ufs-comp0207-2014-1/syllabus</url>
 
     <properties>
         <jdk.version>1.8</jdk.version>
