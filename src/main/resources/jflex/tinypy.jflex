@@ -7,6 +7,7 @@
 package br.ufs.dcomp.lfc.tinypyc.generated;
 
 import br.ufs.dcomp.lfc.tinypyc.Token;
+import br.ufs.dcomp.lfc.tinypyc.Token.TokenType;
 
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -59,7 +60,7 @@ import java.util.Stack;
 	public List<Token> getTokens() throws IOException {
 	  List<Token> tokens = new ArrayList<Token>();
 	  Token tok = token();
-	  while(tok.tipo != Token.EOF) {
+	  while(tok.tipo != TokenType.EOF) {
 	    tokens.add(tok);
 	    tok = token();
 	  }
@@ -95,37 +96,37 @@ WhiteSpace     = [ \n]
  						if(level > curr) {
  						  // indenta
  						  levels.push(level);
- 						  return new Token(Token.BEGIN, yyline);
+ 						  return new Token(TokenType.BEGIN, yyline);
  						} else if(level < curr) {
 						  levels.pop();
 						  // vai rodar o scanner de novo nessa
 						  // indentação, para ver se precisa
 						  // gerar mais de um }
 						  yypushback(level+1);
-						  return new Token(Token.END, yyline);
+						  return new Token(TokenType.END, yyline);
  						} else {
  						  // mesmo nível, não faz nada!
  						}
                       } 
 
 // Exemplo de regra
-"if"					{ return new Token(Token.IF, yyline); }
-"elif"					{ return new Token(Token.ELIF, yyline); }
-"else"					{ return new Token(Token.ELSE, yyline); }
-"pass"					{ return new Token(Token.PASS, yyline); }
+"if"					{ return new Token(TokenType.IF, yyline); }
+"elif"					{ return new Token(TokenType.ELIF, yyline); }
+"else"					{ return new Token(TokenType.ELSE, yyline); }
+"pass"					{ return new Token(TokenType.PASS, yyline); }
 
 
 // Delimitadores
-:						{ return new Token(Token.COLON, yyline); }
+:						{ return new Token(TokenType.COLON, yyline); }
 /* whitespace */
 {WhiteSpace}			{ /* ignore */ }
 
 // Identificadores e numerais devem ser retornados com
-[A-Za-z_][\w_]*			{ return new Token(Token.ID, yytext(), yyline, yycolumn); }
-// e return new Token(Token.NUM, yytext(), yyline)
+[A-Za-z_][\w_]*			{ return new Token(TokenType.ID, yytext(), yyline, yycolumn); }
+// e return new Token(TokenType.NUM, yytext(), yyline)
 
 // Regra para EOF
-<<EOF>>					{ return new Token(Token.EOF, yyline, yycolumn); }
+<<EOF>>					{ return new Token(TokenType.EOF, yyline, yycolumn); }
 
 // Erros léxicos 
 .            { throw new RuntimeException("Erro léxico, linha: " +

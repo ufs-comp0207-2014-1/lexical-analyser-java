@@ -2,6 +2,8 @@ package br.ufs.dcomp.lfc.tinypyc;
 
 import java.util.*;
 
+import br.ufs.dcomp.lfc.tinypyc.Token.TokenType;
+
 /**
  * Created by Gabriel Araujo on 13/01/2015.
  */
@@ -15,12 +17,12 @@ public class CodeSamples {
 
     static {
         List<Token> tokens = new ArrayList<Token>();
-        tokens.add(new Token(Token.IF));
-        tokens.add(new Token(Token.ID, "x"));
-        tokens.add(new Token(Token.COLON));
-        tokens.add(new Token(Token.BEGIN));
-        tokens.add(new Token(Token.PASS));
-        tokens.add(new Token(Token.EOF));
+        tokens.add(new Token(TokenType.IF));
+        tokens.add(new Token(TokenType.ID, "x"));
+        tokens.add(new Token(TokenType.COLON));
+        tokens.add(new Token(TokenType.BEGIN));
+        tokens.add(new Token(TokenType.PASS));
+        tokens.add(new Token(TokenType.EOF));
         TOKENS_01 = Collections.unmodifiableList(tokens);
     }
 
@@ -35,17 +37,17 @@ public class CodeSamples {
 
     static {
         List<Token> tokens = new ArrayList<Token>();
-        tokens.add(new Token(Token.IF));
-        tokens.add(new Token(Token.ID, "test"));
-        tokens.add(new Token(Token.COLON));
-        tokens.add(new Token(Token.BEGIN));
-        tokens.add(new Token(Token.PASS));
-        tokens.add(new Token(Token.END));
-        tokens.add(new Token(Token.ELSE));
-        tokens.add(new Token(Token.COLON));
-        tokens.add(new Token(Token.BEGIN));
-        tokens.add(new Token(Token.ID, "fail"));
-        tokens.add(new Token(Token.EOF));
+        tokens.add(new Token(TokenType.IF));
+        tokens.add(new Token(TokenType.ID, "test"));
+        tokens.add(new Token(TokenType.COLON));
+        tokens.add(new Token(TokenType.BEGIN));
+        tokens.add(new Token(TokenType.PASS));
+        tokens.add(new Token(TokenType.END));
+        tokens.add(new Token(TokenType.ELSE));
+        tokens.add(new Token(TokenType.COLON));
+        tokens.add(new Token(TokenType.BEGIN));
+        tokens.add(new Token(TokenType.ID, "fail"));
+        tokens.add(new Token(TokenType.EOF));
         TOKENS_02 = Collections.unmodifiableList(tokens);
     }
 }

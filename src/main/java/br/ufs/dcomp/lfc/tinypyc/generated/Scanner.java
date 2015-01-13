@@ -9,6 +9,7 @@
 package br.ufs.dcomp.lfc.tinypyc.generated;
 
 import br.ufs.dcomp.lfc.tinypyc.Token;
+import br.ufs.dcomp.lfc.tinypyc.Token.TokenType;
 
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -396,7 +397,7 @@ public class Scanner {
 	public List<Token> getTokens() throws IOException {
 	  List<Token> tokens = new ArrayList<Token>();
 	  Token tok = token();
-	  while(tok.tipo != Token.EOF) {
+	  while(tok.tipo != TokenType.EOF) {
 	    tokens.add(tok);
 	    tok = token();
 	  }
@@ -788,11 +789,11 @@ public class Scanner {
           }
         case 11: break;
         case 3: 
-          { return new Token(Token.ID, yytext(), yyline, yycolumn);
+          { return new Token(TokenType.ID, yytext(), yyline, yycolumn);
           }
         case 12: break;
         case 4: 
-          { return new Token(Token.COLON, yyline);
+          { return new Token(TokenType.COLON, yyline);
           }
         case 13: break;
         case 5: 
@@ -803,40 +804,40 @@ public class Scanner {
  						if(level > curr) {
  						  // indenta
  						  levels.push(level);
- 						  return new Token(Token.BEGIN, yyline);
+ 						  return new Token(TokenType.BEGIN, yyline);
  						} else if(level < curr) {
 						  levels.pop();
 						  // vai rodar o scanner de novo nessa
 						  // indentação, para ver se precisa
 						  // gerar mais de um }
 						  yypushback(level+1);
-						  return new Token(Token.END, yyline);
+						  return new Token(TokenType.END, yyline);
  						} else {
  						  // mesmo nível, não faz nada!
  						}
           }
         case 14: break;
         case 6: 
-          { return new Token(Token.IF, yyline);
+          { return new Token(TokenType.IF, yyline);
           }
         case 15: break;
         case 7: 
-          { return new Token(Token.ELIF, yyline);
+          { return new Token(TokenType.ELIF, yyline);
           }
         case 16: break;
         case 8: 
-          { return new Token(Token.ELSE, yyline);
+          { return new Token(TokenType.ELSE, yyline);
           }
         case 17: break;
         case 9: 
-          { return new Token(Token.PASS, yyline);
+          { return new Token(TokenType.PASS, yyline);
           }
         case 18: break;
         default: 
           if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
             zzAtEOF = true;
               {
-                return new Token(Token.EOF, yyline, yycolumn);
+                return new Token(TokenType.EOF, yyline, yycolumn);
               }
           } 
           else {
