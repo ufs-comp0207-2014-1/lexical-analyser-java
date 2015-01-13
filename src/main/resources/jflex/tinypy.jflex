@@ -73,6 +73,9 @@ import java.util.Stack;
   initIndentStack();
 %init}
 
+// Macros
+WhiteSpace     = [ \n]
+
 %%
 
 /*
@@ -84,7 +87,7 @@ import java.util.Stack;
 
 // Identação, o programa deve começar com um \n extra
 // só linhas que não estão em branco são levadas em conta
-\n[ ]*.               { 
+\n[ ]*[^ ]              {
                         yypushback(1); // volta o primeiro char do prox. token
  						int level = yytext().length()-1;
 						// nível corrente
@@ -106,14 +109,23 @@ import java.util.Stack;
                       } 
 
 // Exemplo de regra
-[bB][oO][oO][lL]      { return new Token(Token.BOOL, yyline); }
+"if"					{ return new Token(Token.IF, yyline); }
+"elif"					{ return new Token(Token.ELIF, yyline); }
+"else"					{ return new Token(Token.ELSE, yyline); }
+"pass"					{ return new Token(Token.PASS, yyline); }
+
+
+// Delimitadores
+:						{ return new Token(Token.COLON, yyline); }
+/* whitespace */
+{WhiteSpace}			{ /* ignore */ }
 
 // Identificadores e numerais devem ser retornados com
-// return new Token(Token.ID, yytext(), yyline)
+[A-Za-z_][\w_]*			{ return new Token(Token.ID, yytext(), yyline, yycolumn); }
 // e return new Token(Token.NUM, yytext(), yyline)
 
 // Regra para EOF
-<<EOF>>      { return new Token(Token.EOF, yyline, yycolumn); }
+<<EOF>>					{ return new Token(Token.EOF, yyline, yycolumn); }
 
 // Erros léxicos 
 .            { throw new RuntimeException("Erro léxico, linha: " +
